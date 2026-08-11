@@ -1,0 +1,37 @@
+name: Bug report
+description: Something renders wrong, crashes, or does not help
+labels: [bug]
+
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Minecraft, loader and mod version, plus the MC Paint version if you know it.
+      placeholder: 1.21.11, NeoForge 21.11.45, MC Paint Fix 1.0.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens
+      description: What you see, and what you expected instead. A screenshot helps for anything visual.
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: >
+        Attach `logs/latest.log`. Turning on **Debug messages** in the mod's settings and reproducing
+        the problem first makes it far more useful.
+    validations:
+      required: true
+
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods
+      description: Especially rendering ones — Sodium, Iris, ImmediatelyFast, resource packs.

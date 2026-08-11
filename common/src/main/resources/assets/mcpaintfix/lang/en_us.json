@@ -1,0 +1,28 @@
+{
+	"key.mcpaintfix.settings": "MC Paint Fix settings",
+
+	"options.mcpaintfix.title": "MC Paint Fix",
+
+	"options.mcpaintfix.enabled": "Replace MC Paint canvases",
+	"options.mcpaintfix.enabled.tooltip": "Draw each MC Paint canvas as one texture instead of one glyph per run of pixels. Off falls back to vanilla rendering.",
+
+	"options.mcpaintfix.debug": "Debug messages",
+	"options.mcpaintfix.debug.tooltip": "Report what the mod is doing in chat and in the log. Off, the mod only reports genuine faults, and only to the log.",
+
+	"options.mcpaintfix.export_png": "Export canvases as PNG",
+	"options.mcpaintfix.export_png.tooltip": "Save every decoded canvas to .paints/<server>/ with an index of where it hangs. An archive, not a speed-up.",
+
+	"options.mcpaintfix.skip_text_layout": "Skip text layout",
+	"options.mcpaintfix.skip_text_layout.tooltip": "Also skip vanilla's line splitting for canvases being replaced. Most of the saving on canvases that change often.",
+
+	"options.mcpaintfix.clear_cache": "Clear cached canvases",
+
+	"options.mcpaintfix.status.off": "Not replacing canvases",
+	"options.mcpaintfix.status.on": "%s textures · %s decoded, %s shared, %s refused",
+	"options.mcpaintfix.status.mismatch": "Off: this resource pack measures canvases differently",
+
+	"notification.mcpaintfix.enabled": "Replacing MC Paint canvases",
+	"notification.mcpaintfix.disabled": "Rendering MC Paint canvases the vanilla way",
+	"notification.mcpaintfix.mismatch": "This resource pack measures MC Paint canvases differently than expected. Falling back to vanilla rendering for this session.",
+	"notification.mcpaintfix.undecodable": "An MC Paint canvas did not decode. Falling back to vanilla rendering for it."
+}

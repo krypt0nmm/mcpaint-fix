@@ -1,0 +1,19 @@
+plugins {
+	id 'net.neoforged.moddev' version "${moddev_version}"
+}
+
+neoForge {
+	version = neoforge_version
+
+	mods {
+		"${mod_id}" {
+			sourceSet sourceSets.main
+		}
+	}
+
+	runs {
+		client {
+			client()
+		}
+	}
+}

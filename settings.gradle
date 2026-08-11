@@ -1,0 +1,22 @@
+pluginManagement {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		maven {
+			name = 'NeoForged'
+			url = 'https://maven.neoforged.net/releases'
+		}
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
+rootProject.name = 'mcpaint-fix'
+
+// The mod itself lives in common/, which is a plain source folder rather than a project: both
+// loaders compile it directly against their own Minecraft. Official Mojang mappings are used on
+// both sides, so the same source resolves to the same names without a translation layer.
+include 'fabric'
+include 'neoforge'

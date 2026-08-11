@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${mod_version}",
+	"name": "${mod_name}",
+	"description": "Draws MC Paint canvases as one texture instead of thousands of glyphs.",
+	"authors": [
+		"${mod_author}"
+	],
+	"contact": {
+		"homepage": "${mod_homepage}",
+		"sources": "${mod_sources}",
+		"issues": "${mod_sources}/issues"
+	},
+	"license": "${mod_license}",
+	"icon": "assets/mcpaintfix/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"dev.krypton.mcpaintfix.fabric.FabricClientEntry"
+		],
+		"modmenu": [
+			"dev.krypton.mcpaintfix.fabric.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		{
+			"config": "mcpaintfix.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": "${fabric_minecraft_range}",
+		"java": ">=21"
+	}
+}

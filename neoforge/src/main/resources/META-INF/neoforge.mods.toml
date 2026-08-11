@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${mod_license}"
+issueTrackerURL = "${mod_sources}/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_author}"
+description = "Draws MC Paint canvases as one texture instead of thousands of glyphs."
+logoFile = "assets/mcpaintfix/icon.png"
+displayURL = "${mod_homepage}"
+
+[[mixins]]
+config = "mcpaintfix.mixins.json"
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_version_range}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${neoforge_minecraft_range}"
+ordering = "NONE"
+side = "CLIENT"

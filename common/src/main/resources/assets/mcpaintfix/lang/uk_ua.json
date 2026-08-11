@@ -1,0 +1,28 @@
+{
+	"key.mcpaintfix.settings": "Налаштування MC Paint Fix",
+
+	"options.mcpaintfix.title": "MC Paint Fix",
+
+	"options.mcpaintfix.enabled": "Замінювати полотна MC Paint",
+	"options.mcpaintfix.enabled.tooltip": "Малювати кожне полотно MC Paint однією текстурою замість гліфа на кожну смугу пікселів. Вимкнено — звичайний рендер.",
+
+	"options.mcpaintfix.debug": "Діагностичні повідомлення",
+	"options.mcpaintfix.debug.tooltip": "Писати в чат і в лог, що робить мод. Вимкнено — мод повідомляє лише про справжні збої і лише в лог.",
+
+	"options.mcpaintfix.export_png": "Зберігати полотна в PNG",
+	"options.mcpaintfix.export_png.tooltip": "Зберігати кожне розпізнане полотно в .paints/<сервер>/ разом з описом, де воно висить. Це архів, а не прискорення.",
+
+	"options.mcpaintfix.skip_text_layout": "Пропускати розкладку тексту",
+	"options.mcpaintfix.skip_text_layout.tooltip": "Пропускати також розбиття тексту на рядки для замінених полотен. Основна економія на полотнах, які часто змінюються.",
+
+	"options.mcpaintfix.clear_cache": "Очистити кеш полотен",
+
+	"options.mcpaintfix.status.off": "Полотна не замінюються",
+	"options.mcpaintfix.status.on": "%s текстур · %s розпізнано, %s спільних, %s відхилено",
+	"options.mcpaintfix.status.mismatch": "Вимкнено: цей ресурспак міряє полотна інакше",
+
+	"notification.mcpaintfix.enabled": "Полотна MC Paint замінюються",
+	"notification.mcpaintfix.disabled": "Полотна MC Paint малюються звичайним рендером",
+	"notification.mcpaintfix.mismatch": "Цей ресурспак міряє полотна MC Paint інакше, ніж очікувалось. До кінця сесії використовується звичайний рендер.",
+	"notification.mcpaintfix.undecodable": "Полотно MC Paint не вдалося розпізнати. Для нього використовується звичайний рендер."
+}

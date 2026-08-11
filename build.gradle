@@ -1,0 +1,58 @@
+subprojects {
+	apply plugin: 'java'
+
+	group = maven_group
+	version = "${mod_version}+mc${minecraft_version}"
+	base.archivesName = "${rootProject.name}-${project.name}"
+
+	repositories {
+		mavenCentral()
+	}
+
+	sourceSets {
+		main {
+			java.srcDir rootProject.file('common/src/main/java')
+			resources.srcDir rootProject.file('common/src/main/resources')
+		}
+	}
+
+	java {
+		withSourcesJar()
+
+		sourceCompatibility = JavaVersion.VERSION_21
+		targetCompatibility = JavaVersion.VERSION_21
+	}
+
+	tasks.withType(JavaCompile).configureEach {
+		options.release = 21
+		options.encoding = 'UTF-8'
+	}
+
+	processResources {
+		def properties = [
+				mod_id               : mod_id,
+				mod_name             : mod_name,
+				mod_version          : project.version,
+				mod_license          : mod_license,
+				mod_author           : mod_author,
+				mod_homepage         : mod_homepage,
+				mod_sources          : mod_sources,
+				loader_version       : loader_version,
+				neoforge_version_range: neoforge_version_range,
+				fabric_minecraft_range   : fabric_minecraft_range,
+				neoforge_minecraft_range : neoforge_minecraft_range,
+		]
+
+		inputs.properties properties
+
+		filesMatching(['fabric.mod.json', 'META-INF/neoforge.mods.toml']) {
+			expand properties
+		}
+	}
+
+	jar {
+		from(rootProject.file('LICENSE')) {
+			rename { "${it}_${mod_id}" }
+		}
+	}
+}
