@@ -26,8 +26,8 @@ public final class PaintKeys {
 			pressed = true;
 		}
 
-		if (pressed && minecraft.screen == null) {
-			minecraft.setScreen(new PaintOptionsScreen(null));
+		if (pressed && minecraft.gui.screen() == null) {
+			minecraft.gui.setScreen(new PaintOptionsScreen(null));
 		}
 	}
 }

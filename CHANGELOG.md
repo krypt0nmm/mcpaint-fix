@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0+mc26.3
+
+Port to Minecraft 26.3 (Fabric and NeoForge, Java 25). Behaviour is the same as 1.0.0, except:
+
+- The canvas quad is queued in the render phase vanilla would have used for the text (solid for
+  opaque text), so it draws in the same pass relative to glass, water and other translucent geometry.
+- The background goes through vanilla's own text background call.
+- See-through displays are left to vanilla: 26.3 draws see-through text in a distance-sorted pass that
+  a quad cannot join. MC Paint never sets the flag.
+
 ## 1.0.0
 
 First release.

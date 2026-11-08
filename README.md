@@ -1,6 +1,6 @@
 # MC Paint Fix
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-brightgreen)](https://modrinth.com/mod/mcpaint-fix)
+[![Minecraft](https://img.shields.io/badge/Minecraft-26.3-brightgreen)](https://modrinth.com/mod/mcpaint-fix)
 [![Loaders](https://img.shields.io/badge/loaders-Fabric%20%7C%20NeoForge-blue)](https://modrinth.com/mod/mcpaint-fix)
 [![Client only](https://img.shields.io/badge/side-client%20only-orange)](https://modrinth.com/mod/mcpaint-fix)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
@@ -34,7 +34,9 @@ reconstructed exactly, off the GPU, before the canvas is ever on screen.
 
 **Same place, same size, same pixels.** The quad occupies the font space the text did — `width × 10`
 units across, `−1` to `height × 10 − 1` down — and goes through vanilla's own transform. It uses the
-text render type, so it keeps the depth bias that wins the z-fight against the item frame behind it.
+text render type, so it keeps the depth bias that wins the z-fight against the item frame behind it,
+and it is queued in the same render phase vanilla would have queued the text in — opaque text is drawn
+with the solid geometry, so a canvas behind stained glass or water still shows through it.
 
 **Shading stays a property of the wall.** MC Paint ships four copies of its font, pre-multiplied by
 Minecraft's block face shading and picked by the direction a canvas faces. That belongs to the
@@ -46,8 +48,8 @@ copies of the same canvas cost one texture.
 
 **It refuses rather than guesses.** Anything the decoder does not fully recognise goes back to
 vanilla rendering — a wrong picture on a wall would be worse than a slow one. So do displays that
-would not survive the substitution: a text shadow, or a line width narrow enough that vanilla would
-wrap the rows. The ten-units-per-pixel geometry rests on advances declared in a resource pack MC
+would not survive the substitution: a text shadow, see-through text (drawn in a distance-sorted pass a
+quad cannot join), or a line width narrow enough that vanilla would wrap the rows. The ten-units-per-pixel geometry rests on advances declared in a resource pack MC
 Paint can change, so the first canvas of a session is also laid out by vanilla and the two answers
 compared; a disagreement switches the mod off for that session.
 
@@ -60,7 +62,7 @@ still, then picked back up.
 
 | | |
 |---|---|
-| Minecraft | 1.21.11 |
+| Minecraft | 26.3 |
 | Loaders | Fabric, NeoForge |
 | Side | client only — the server does not need it, and does not know it is there |
 | Fabric API | not required |
@@ -71,11 +73,11 @@ no performance mod competes for. Sodium rewrites terrain and chunk building, not
 
 ### Other Minecraft versions
 
-Every method this mod hooks is unchanged back to 1.21.9, but two symbols it names were renamed in
-1.21.11: `ResourceLocation` became `Identifier`, and the static render type factories moved from
-`RenderType` to `rendertype.RenderTypes`. One jar therefore cannot cover both, and 1.21.9 – 1.21.10
-belong on their own branch. Anything older than 1.21.9 predates the render pipeline this is built on
-and needs a different renderer entirely.
+The 26.3 port lives on its own branch; 1.21.11 stays on `master`. 26.x ships unobfuscated and
+renamed a fair part of the client — screens render through `GuiGraphicsExtractor`, the open screen
+moved to `Gui`, and text is now queued per render phase rather than in submission order — so one jar
+cannot cover both. The hooks themselves (`TextDisplayRenderer.extractRenderState`, `submitInner`,
+`TextDisplay.cacheDisplay`) are unchanged.
 
 ## Installation
 
@@ -124,8 +126,10 @@ The mod itself lives in `common/`, which is a plain source folder rather than a 
 loaders compile it directly against their own Minecraft. Official Mojang mappings are used on both
 sides, so the same source resolves to the same names without a translation layer.
 
-Java 21 is required. Gradle picks it up through `gradle/gradle-daemon-jvm.properties` and does not
-care what the system default is.
+Java 25 is required, by 26.3 itself and by Loom 1.18. Gradle picks it up through
+`gradle/gradle-daemon-jvm.properties` and does not care what the system default is. On Fabric the
+build uses the non-remapping Loom plugin: 26.x ships under Mojang's own names, so there are no mappings
+and the jar `jar` builds is the jar players run.
 
 ## License
 

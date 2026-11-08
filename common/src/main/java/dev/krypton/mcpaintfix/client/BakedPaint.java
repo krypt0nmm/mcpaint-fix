@@ -19,15 +19,14 @@ import net.minecraft.resources.Identifier;
  * <p>Textures are registered under a recycled slot identifier rather than one named after the
  * picture. {@code RenderTypes.text*} memoises a render type per identifier and never forgets one, so
  * naming them after content would grow a map for the rest of the session; a fixed pool bounds it,
- * and lets each baked painting hold its two render types instead of looking them up per frame.
+ * and lets each baked painting hold its render type instead of looking it up per frame.
  */
 public final class BakedPaint {
 	private final String hash;
 	private final int slot;
 	private final Identifier textureId;
 	private final PaintCanvas canvas;
-	private final RenderType polygonOffset;
-	private final RenderType seeThrough;
+	private final RenderType renderType;
 
 	private boolean released;
 	long lastUsedFrame;
@@ -37,8 +36,7 @@ public final class BakedPaint {
 		this.slot = slot;
 		this.textureId = textureId;
 		this.canvas = canvas;
-		this.polygonOffset = RenderTypes.textPolygonOffset(textureId);
-		this.seeThrough = RenderTypes.textSeeThrough(textureId);
+		this.renderType = RenderTypes.textPolygonOffset(textureId);
 	}
 
 	/** Uploads {@code canvas}. Must run on the render thread, since it talks to the GPU device. */
@@ -66,8 +64,9 @@ public final class BakedPaint {
 		return this.canvas;
 	}
 
-	public RenderType renderType(boolean throughWalls) {
-		return throughWalls ? this.seeThrough : this.polygonOffset;
+	/** The render type vanilla draws display text with, bound to this canvas's texture. */
+	public RenderType renderType() {
+		return this.renderType;
 	}
 
 	/**

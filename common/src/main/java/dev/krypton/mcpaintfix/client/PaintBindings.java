@@ -93,10 +93,11 @@ public final class PaintBindings {
 	 * Whether the display's own settings are ones a flat texture can reproduce.
 	 *
 	 * <p>A drop shadow is drawn per glyph, offset and darkened; there is no shadow of a picture to
-	 * stand in for it. MC Paint never sets one, but another datapack could reuse its font.
+	 * stand in for it. See-through text is drawn in a pass the quad cannot join, see
+	 * {@link PaintRenderer#canDraw}. MC Paint sets neither, but another datapack could reuse its font.
 	 */
 	private static boolean isReproducible(Display.TextDisplay.TextRenderState state) {
-		return (state.flags() & Display.TextDisplay.FLAG_SHADOW) == 0;
+		return (state.flags() & Display.TextDisplay.FLAG_SHADOW) == 0 && PaintRenderer.canDraw(state.flags());
 	}
 
 	private static PaintBinding bind(PaintHolder holder, Component text, PaintBinding binding) {

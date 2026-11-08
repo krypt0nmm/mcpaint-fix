@@ -3,11 +3,10 @@ package dev.krypton.mcpaintfix.client.gui;
 import dev.krypton.mcpaintfix.client.PaintCache;
 import dev.krypton.mcpaintfix.client.PaintConfig;
 import dev.krypton.mcpaintfix.client.PaintGeometry;
-import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -50,10 +49,10 @@ public class PaintOptionsScreen extends OptionsSubScreen {
 	}
 
 	@Override
-	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-		super.render(graphics, mouseX, mouseY, partialTick);
+	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+		super.extractRenderState(graphics, mouseX, mouseY, partialTick);
 		int y = this.height - this.layout.getFooterHeight() - this.font.lineHeight - HeaderAndFooterLayout.MAGIC_PADDING;
-		graphics.drawCenteredString(this.font, status(), this.width / 2, y, STATUS_COLOUR);
+		graphics.centeredText(this.font, status(), this.width / 2, y, STATUS_COLOUR);
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class PaintOptionsScreen extends OptionsSubScreen {
 		PaintConfig.get().save();
 	}
 
-	private static OptionInstance<Boolean> option(String name, boolean value, Consumer<Boolean> onChange) {
+	private static OptionInstance<Boolean> option(String name, boolean value, OptionInstance.ValueUpdateListener<Boolean> onChange) {
 		String key = "options.mcpaintfix." + name;
 
 		return OptionInstance.createBoolean(

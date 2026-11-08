@@ -8,7 +8,7 @@ body:
     attributes:
       label: Versions
       description: Minecraft, loader and mod version, plus the MC Paint version if you know it.
-      placeholder: 1.21.11, NeoForge 21.11.45, MC Paint Fix 1.0.0
+      placeholder: 26.3, Fabric Loader 0.20.1, MC Paint Fix 1.0.0
     validations:
       required: true
 

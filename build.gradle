@@ -19,12 +19,13 @@ subprojects {
 	java {
 		withSourcesJar()
 
-		sourceCompatibility = JavaVersion.VERSION_21
-		targetCompatibility = JavaVersion.VERSION_21
+		// 26.3 itself requires Java 25. The toolchain makes compilation independent of the JDK Gradle
+		// happens to run on.
+		toolchain.languageVersion = JavaLanguageVersion.of(25)
 	}
 
 	tasks.withType(JavaCompile).configureEach {
-		options.release = 21
+		options.release = 25
 		options.encoding = 'UTF-8'
 	}
 

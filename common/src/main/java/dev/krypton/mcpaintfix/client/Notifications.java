@@ -27,7 +27,7 @@ public final class Notifications {
 		Minecraft minecraft = Minecraft.getInstance();
 
 		if (minecraft.player != null) {
-			minecraft.player.displayClientMessage(Component.empty().append(PREFIX).append(Component.translatable(key, args)), false);
+			minecraft.gui.hud.getChat().addClientSystemMessage(Component.empty().append(PREFIX).append(Component.translatable(key, args)));
 		}
 	}
 
